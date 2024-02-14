@@ -1,9 +1,9 @@
-const EMAIL_REGEX = require("./emailRegex");
-const COCKTAILS_CATEGORY = require("./cocktailsCategory");
-const GLASSES = require("./glasses");
+const EMAIL_REGEX = require('./emailRegex');
+const DRINKS_CATEGORY = require('./drinksCategory');
+const GLASSES = require('./glasses');
 
 module.exports = {
   EMAIL_REGEX,
-  COCKTAILS_CATEGORY,
+  DRINKS_CATEGORY,
   GLASSES,
 };
