@@ -4,6 +4,6 @@ const router = express.Router();
 
 const { authenticate } = require('../middlewares');
 
-// filters routes
+// subscriptions routes
 
 module.exports = router;

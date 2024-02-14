@@ -1,7 +1,7 @@
-const multer = require("multer");
-const path = require("node:path");
-const { HttpError } = require("../helpers");
-const tempDir = path.join(__dirname, "..", "temp");
+const multer = require('multer');
+const path = require('node:path');
+const { HttpError } = require('../helpers');
+const tempDir = path.join(__dirname, '..', 'temp');
 
 const multerConfig = multer.diskStorage({
   destination: tempDir,
@@ -18,13 +18,13 @@ const upload = multer({
   },
   fileFilter: (req, file, cb) => {
     if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
+      file.mimetype == 'image/png' ||
+      file.mimetype == 'image/jpg' ||
+      file.mimetype == 'image/jpeg'
     ) {
       cb(null, true);
     } else {
-      return cb(HttpError(400, "Invalid mime type"), false);
+      return cb(HttpError(400, 'Invalid mime type'), false);
     }
   },
 });

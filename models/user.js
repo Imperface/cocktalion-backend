@@ -1,13 +1,13 @@
-const Joi = require("joi");
-const { Schema, model } = require("mongoose");
-const { handleMongooseError } = require("../helpers");
-const { EMAIL_REGEX } = require("../constants");
+const Joi = require('joi');
+const { Schema, model } = require('mongoose');
+const { handleMongooseError } = require('../helpers');
+const { EMAIL_REGEX } = require('../constants');
 
 // mongoose schema
 const userSchema = new Schema({}, { versionKey: false, timestamps: true });
 
 // mongoose error handler
-userSchema.post("save", handleMongooseError);
+userSchema.post('save', handleMongooseError);
 
 // Joi schemas
 
@@ -15,6 +15,6 @@ userSchema.post("save", handleMongooseError);
 const schemas = {};
 
 // create model for user
-const User = model("user", userSchema);
+const User = model('user', userSchema);
 
 module.export = { User, schemas };

@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const { validateBody, authenticate, isValidId } = require("../middlewares");
+const { validateBody, authenticate, isValidId } = require('../middlewares');
 
 const jsonParser = express.json();
 

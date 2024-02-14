@@ -1,7 +1,7 @@
-const Joi = require("joi");
-const { Schema, model } = require("mongoose");
-const { handleMongooseError } = require("../helpers");
-const { EMAIL_REGEX } = require("../constants");
+const Joi = require('joi');
+const { Schema, model } = require('mongoose');
+const { handleMongooseError } = require('../helpers');
+const { EMAIL_REGEX } = require('../constants');
 
 // mongoose schema
 const ingredientSchema = new Schema(
@@ -10,7 +10,7 @@ const ingredientSchema = new Schema(
 );
 
 // mongoose error handler
-ingredientSchema.post("save", handleMongooseError);
+ingredientSchema.post('save', handleMongooseError);
 
 // Joi schemas
 
@@ -18,6 +18,6 @@ ingredientSchema.post("save", handleMongooseError);
 const schemas = {};
 
 // create model for ingredient
-const Ingredient = model("ingredient", cocktailSchema);
+const Ingredient = model('ingredient', cocktailSchema);
 
 module.export = { Ingredient, schemas };
