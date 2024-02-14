@@ -10,8 +10,8 @@ const drinksRoutes = require('./drinks');
 // import filters routes
 const filtersRoutes = require('./filters');
 
-// import subscriptions routes
-const subscriptionsRoutes = require('./subscriptions');
+// import subscribes routes
+const subscribesRoutes = require('./subscribes');
 
 // use users routes if path with /users
 router.use('/users', usersRouter);
@@ -22,7 +22,7 @@ router.use('/drinks', drinksRoutes);
 // use filters routes if path with /filters
 router.use('/filters', filtersRoutes);
 
-// use subscriptions routes if path with /subscriptions
-router.use('/subscriptions', subscriptionsRoutes);
+// use subscribes routes if path with /subscribes
+router.use('/subscribes', subscribesRoutes);
 
 module.exports = router;
