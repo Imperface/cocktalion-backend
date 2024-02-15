@@ -5,7 +5,49 @@ const { EMAIL_REGEX } = require('../constants');
 
 // mongoose schema
 const ingredientSchema = new Schema(
-  {},
+  {
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    ingredientThumb: {
+      type: String,
+      required: true,
+    },
+    'thumb-medium': {
+      type: String,
+      required: true,
+    },
+    'thumb-small': {
+      type: String,
+      required: true,
+    },
+    abv: {
+      type: String,
+      required: true,
+    },
+    alcohol: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    flavour: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+  },
   { versionKey: false, timestamps: true }
 );
 
@@ -18,6 +60,6 @@ ingredientSchema.post('save', handleMongooseError);
 const schemas = {};
 
 // create model for ingredient
-const Ingredient = model('ingredient', cocktailSchema);
+const Ingredient = model('ingredient', ingredientSchema);
 
 module.exports = { Ingredient, schemas };
