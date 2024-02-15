@@ -20,4 +20,4 @@ const schemas = {};
 // create model for ingredient
 const Ingredient = model('ingredient', cocktailSchema);
 
-module.export = { Ingredient, schemas };
+module.exports = { Ingredient, schemas };

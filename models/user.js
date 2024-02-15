@@ -82,4 +82,4 @@ const schemas = {
 // create model for user
 const User = model('user', userSchema);
 
-module.export = { User, schemas };
+module.exports = { User, schemas };
