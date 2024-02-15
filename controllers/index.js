@@ -1,4 +1,4 @@
-const { listCategory } = require('./filters');
+const listCategory = require('./filters/categories');
 const { controllerWrapper } = require('../decorators');
 const updatedSubscribe = require('./subscribes/subscribe');
 const listCategory = require('./filters/listCategory');
