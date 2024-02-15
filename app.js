@@ -8,6 +8,7 @@ const app = express();
 
 // permission cors
 app.use(cors());
+app.use(express.json());
 
 // add routes to app
 app.use('/api', routes);
