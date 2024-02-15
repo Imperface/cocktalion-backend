@@ -11,6 +11,4 @@ const jsonParser = express.json();
 
 router.get('/current', authenticate, controller.getCurrent);
 
-router.patch('/update', authenticate, isValidId, controller.updateUser);
-
 module.exports = router;

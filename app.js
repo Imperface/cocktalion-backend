@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('node:path');
 
-const userRouter = require('./routes/users');
+const routes = require('./routes');
 
 const app = express();
 
@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 
 // add routes to app
-app.use('/api/users', userRouter);
+app.use('/api', routes);
 
 // if routes not found, send message with 404 status
 app.use((error, res, next) => {
