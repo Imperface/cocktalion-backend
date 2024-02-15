@@ -2,13 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const controllers = require ("../controllers");
+const Ctrl = require ("../controllers");
 
 const { validateBody, authenticate, isValidId } = require('../middlewares');
 
 const jsonParser = express.json();
 
 // drinks routes
-router.get('/:id', isValidId, controllers.getById);
+router.get('/:id', isValidId, Ctrl.getDrinkById);
 
 module.exports = router;
