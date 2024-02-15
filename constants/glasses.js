@@ -32,4 +32,4 @@ const GLASSES = [
   'Balloon Glass',
   'Coupe Glass',
 ];
-module.export = GLASSES;
+module.exports = GLASSES;
