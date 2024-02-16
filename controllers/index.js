@@ -12,14 +12,15 @@ const getFavoriteDrinks = require('./drinks/getFavoriteDrinks');
 const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks');
 const removeFavoritesDrinks = require('./drinks/removeFavoritesDrinks');
 
-
 const signup = require('./users/signup');
 const signin = require('./users/signin');
-
-const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks');
-
+const signout = require('./users/signout');
 
 module.exports = {
+  signup: controllerWrapper(signup),
+  signin: controllerWrapper(signin),
+  signout: controllerWrapper(signout),
+
   updatedSubscribe: controllerWrapper(updatedSubscribe),
   listCategory: controllerWrapper(listCategory),
   listGlasses: controllerWrapper(listGlasses),
@@ -30,13 +31,8 @@ module.exports = {
 
   getDrinksPopular: controllerWrapper(getDrinksPopular),
 
-  signup: controllerWrapper(signup),
-  signin: controllerWrapper(signin),
-
   getDrinksPopular: controllerWrapper(getDrinksPopular),
   addToFavoritesDrinks: controllerWrapper(addToFavoritesDrinks),
 
-
   removeFavoritesDrinks: controllerWrapper(removeFavoritesDrinks),
-
 };
