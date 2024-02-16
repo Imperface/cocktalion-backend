@@ -11,9 +11,9 @@ const jsonParser = express.json();
 
 
 // drinks routes
-
+const { schemas } = require('../models/subscribe');
 router.get('/', authenticate, jsonParser, Ctrl.getFavoriteDrinks);
-
+router.post('/', authenticate, validateBody(schemas.drinksAddSchema), jsonParser, Ctrl.addToFavoritesDrinks);
 
 // router.get('/own', Ctrl.getDrinksOwner);
 router.get('/popular', Ctrl.getDrinksPopular);
