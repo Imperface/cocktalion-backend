@@ -22,4 +22,6 @@ router.get('/popular', Ctrl.getDrinksPopular);
 
 router.get('/:id', isValidId, Ctrl.getDrinkById);
 
+router.delete('/own/remove/:id', authenticate, isValidId, Ctrl.removeOwnerDrinksById )
+
 module.exports = router;
