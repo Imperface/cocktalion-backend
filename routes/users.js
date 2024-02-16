@@ -17,5 +17,11 @@ router.post(
   validateBody(schemas.signupSchema),
   controller.signup
 );
+router.post(
+  '/signin',
+  jsonParser,
+  validateBody(schemas.signinSchema),
+  controller.signin
+);
 
 module.exports = router;

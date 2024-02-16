@@ -10,9 +10,9 @@ const getCurrent = require('./users/getCurrent');
 const getFavoriteDrinks = require('./drinks/getFavoriteDrinks');
 
 const signup = require('./users/signup');
+const signin = require('./users/signin');
 
-const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks')
-
+const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks');
 
 module.exports = {
   updatedSubscribe: controllerWrapper(updatedSubscribe),
@@ -23,12 +23,11 @@ module.exports = {
 
   getFavoriteDrinks: controllerWrapper(getFavoriteDrinks),
 
-
   getDrinksPopular: controllerWrapper(getDrinksPopular),
 
   signup: controllerWrapper(signup),
+  signin: controllerWrapper(signin),
 
-  getDrinksPopular:controllerWrapper(getDrinksPopular),
+  getDrinksPopular: controllerWrapper(getDrinksPopular),
   addToFavoritesDrinks: controllerWrapper(addToFavoritesDrinks),
-
 };
