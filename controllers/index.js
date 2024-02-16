@@ -16,7 +16,6 @@ const removeFavoritesDrinks = require('./drinks/removeFavoritesDrinks');
 const signup = require('./users/signup');
 const signin = require('./users/signin');
 
-const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks');
 
 
 module.exports = {
