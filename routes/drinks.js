@@ -8,14 +8,13 @@ const { validateBody, authenticate, isValidId } = require('../middlewares');
 
 const jsonParser = express.json();
 
-const Ctrl = require('../controllers');
 
 
 // drinks routes
 
-router.get('/own', Ctrl.getDrinkOwner)
+// router.get('/own', Ctrl.getDrinksOwner);
+router.get('/popular', Ctrl.getDrinksPopular);
 
 router.get('/:id', isValidId, Ctrl.getDrinkById);
-
 
 module.exports = router;
