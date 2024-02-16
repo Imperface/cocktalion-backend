@@ -8,6 +8,7 @@ const getDrinksPopular = require ('./drinks/getDrinksPopular.js')
 const getDrinkById = require('./drinks/getDrinkById.js');
 const getCurrent = require('./users/getCurrent');
 const getFavoriteDrinks = require('./drinks/getFavoriteDrinks');
+const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks')
 
 
 module.exports = {
@@ -20,5 +21,5 @@ module.exports = {
   getFavoriteDrinks: controllerWrapper(getFavoriteDrinks),
 
   getDrinksPopular:controllerWrapper(getDrinksPopular),
-
+  addToFavoritesDrinks: controllerWrapper(addToFavoritesDrinks),
 };
