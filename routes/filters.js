@@ -9,8 +9,8 @@ const { authenticate } = require('../middlewares');
 // filters routes
 router.get('/categories', authenticate, Ctrl.listCategory);
 
-// router.get('/ingredients', authenticate);
+router.get('/glasses', authenticate, Ctrl.listGlasses);
 
-// router.get('/glasses', authenticate);
+// router.get('/ingredients', authenticate);
 
 module.exports = router;

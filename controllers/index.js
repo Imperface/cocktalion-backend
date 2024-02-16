@@ -1,18 +1,19 @@
-
 const { controllerWrapper } = require('../decorators');
 
 const listCategory = require('./filters/categories');
+const listGlasses = require('./filters/glasses');
 const updatedSubscribe = require('./subscribes/subscribe');
-// const getDrinksOwner = require('./drinks/getDrinksOwner');
-const getDrinkById = require ("./drinks/getDrinkById.js");
+
 const getDrinksPopular = require ('./drinks/getDrinksPopular.js')
+const getDrinkById = require('./drinks/getDrinkById.js');
+const getCurrent = require('./users/getCurrent');
 
 
 module.exports = {
   updatedSubscribe: controllerWrapper(updatedSubscribe),
   listCategory: controllerWrapper(listCategory),
-  // getDrinksOwner: controllerWrapper(getDrinksOwner),
+  listGlasses: controllerWrapper(listGlasses),
   getDrinkById: controllerWrapper(getDrinkById),
+  getCurrent: controllerWrapper(getCurrent),
   getDrinksPopular:controllerWrapper(getDrinksPopular),
 };
-
