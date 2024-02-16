@@ -16,11 +16,11 @@ router.get('/', authenticate, jsonParser, Ctrl.getFavoriteDrinks);
 router.post('/', authenticate, validateBody(schemas.drinksAddSchema), jsonParser, Ctrl.addToFavoritesDrinks);
 router.delete('/:drinkId', authenticate, isValidId, Ctrl.removeFavoritesDrinks);
 
-// router.get('/own', Ctrl.getDrinksOwner);
-router.get('/popular', Ctrl.getDrinksPopular);
+router.get('/own', authenticate, Ctrl.getDrinksOwner);
+router.get('/popular', authenticate, Ctrl.getDrinksPopular);
 
 
-router.get('/:id', isValidId, Ctrl.getDrinkById);
+router.get('/:id', authenticate, isValidId, Ctrl.getDrinkById);
 
 router.delete('/own/remove/:id', authenticate, isValidId, Ctrl.removeOwnerDrinksById )
 
