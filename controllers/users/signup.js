@@ -1,6 +1,6 @@
 const { User } = require('../../models/user');
 const HttpError = require('../../helpers/HttpError');
-const controllerWrapper = require('../../decorators/controllerWrapper');
+
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
 

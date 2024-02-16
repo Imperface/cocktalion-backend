@@ -14,9 +14,9 @@ const removeFavoritesDrinks = require('./drinks/removeFavoritesDrinks');
 
 
 const signup = require('./users/signup');
+const signin = require('./users/signin');
 
-const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks')
-
+const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks');
 
 
 module.exports = {
@@ -28,13 +28,14 @@ module.exports = {
 
   getFavoriteDrinks: controllerWrapper(getFavoriteDrinks),
 
-
   getDrinksPopular: controllerWrapper(getDrinksPopular),
 
   signup: controllerWrapper(signup),
+  signin: controllerWrapper(signin),
 
-  getDrinksPopular:controllerWrapper(getDrinksPopular),
+  getDrinksPopular: controllerWrapper(getDrinksPopular),
   addToFavoritesDrinks: controllerWrapper(addToFavoritesDrinks),
+
 
   removeFavoritesDrinks: controllerWrapper(removeFavoritesDrinks),
 
