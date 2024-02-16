@@ -17,10 +17,10 @@ router.post('/', authenticate, validateBody(schemas.drinksAddSchema), jsonParser
 router.delete('/:drinkId', authenticate, isValidId, Ctrl.removeFavoritesDrinks);
 
 router.get('/own', authenticate, Ctrl.getDrinksOwner);
-router.get('/popular', Ctrl.getDrinksPopular);
+router.get('/popular', authenticate, Ctrl.getDrinksPopular);
 
 
-router.get('/:id', isValidId, Ctrl.getDrinkById);
+router.get('/:id', authenticate, isValidId, Ctrl.getDrinkById);
 
 router.delete('/own/remove/:id', authenticate, isValidId, Ctrl.removeOwnerDrinksById )
 
