@@ -10,7 +10,7 @@ const deleteDrinksOwnerById = async (req, res) => {
     if (drink === null) {
         throw HttpError(404, "Drink Not Found");
       }
-      res.status(201).send({ message: "Drink deleted" });
+      res.status(200).send({ message: "Drink deleted" });
     };
        
     
