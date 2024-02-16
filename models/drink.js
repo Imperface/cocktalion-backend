@@ -9,6 +9,7 @@ const drinkSchema = new Schema(
     drink: {
       type: String,
       required: true,
+      unique: true,
     },
     drinkAlternate: {
       type: String,
