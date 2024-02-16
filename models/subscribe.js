@@ -4,17 +4,24 @@ const { handleMongooseError } = require('../helpers');
 const { EMAIL_REGEX } = require('../constants');
 
 // mongoose schema
-const subscribeSchema = new Schema({
-  subscribe: {
-    type: Boolean,
-    default: true,
+const subscribeSchema = new Schema(
+  {
+    subscribe: {
+      type: Boolean,
+      default: true,
+    },
+    email: {
+      type: String,
+      match: EMAIL_REGEX,
+      required: true,
+    },
+    addedBy: {
+      type: Schema.Types.ObjectId,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    match: EMAIL_REGEX,
-    required: true,
-  },
-}, { versionKey: false, timestamps: true });
+  { versionKey: false, timestamps: true }
+);
 
 // mongoose error handler
 subscribeSchema.post('save', handleMongooseError);
