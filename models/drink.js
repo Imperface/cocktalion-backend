@@ -92,7 +92,7 @@ const drinkSchema = new Schema(
           },
         },
       ],
-      required: true,
+      default: [],
     },
   },
   { versionKey: false, timestamps: true }
@@ -136,46 +136,14 @@ const drinksAddSchema = Joi.object({
     'string.base': `drinkThumb should be a type of 'string'`,
     'any.required': `missing required drinkThumb field`,
   }),
-  ingredients: Joi.array()
-    .items(
-      Joi.object({
-        title: Joi.string().required().messages({
-          'string.base': `title should be a type of 'string'`,
-          'any.required': `missing required title field`,
-        }),
-        measure: Joi.string().required().messages({
-          'string.base': `measure should be a type of 'string'`,
-          'any.required': `missing required measure field`,
-        }),
-        _id: Joi.string().required().messages({
-          'string.base': `_id should be a type of 'string'`,
-          'any.required': `missing required _id field`,
-        }),
-      })
-    )
-    .required()
-    .messages({
-      'array.base': `ingredients should be a type of 'array'`,
-      'any.required': `missing required ingredients field`,
-    }),
+  ingredients: Joi.string().required().messages({
+    'string.base': `ingredients should be a type of 'string'`,
+    'any.required': `missing required ingredients field`,
+  }),
   owner: Joi.string().required().messages({
     'string.base': `owner should be a type of 'string'`,
     'any.required': `missing required owner field`,
   }),
-  favorites: Joi.array()
-    .items(
-      Joi.object({
-        _id: Joi.string().required().messages({
-          'string.base': `favorites should be a type of 'string'`,
-          'any.required': `missing required favorites field`,
-        }),
-      })
-    )
-    .required()
-    .messages({
-      'array.base': `favorites should be a type of 'array'`,
-      'any.required': `missing required favorites field`,
-    }),
   shortDescription: Joi.string().required().messages({
     'string.base': `drink should be a type of 'string'`,
     'any.required': `missing required drink field`,
