@@ -4,36 +4,15 @@ const { handleMongooseError } = require('../helpers');
 const { EMAIL_REGEX, DATE_REGEX } = require('../constants');
 
 // mongoose schema
+
 const userSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    dateOfBirth: {
-      type: String,
-      match: DATE_REGEX,
-      required: true,
-    },
-    email: {
-      type: String,
-      match: EMAIL_REGEX,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
-    },
-    token: {
-      type: String,
-      default: '',
-    },
-    avatarURL: {
-      type: String,
-      require: true,
-    },
+    name: { type: String, required: true },
+    dateOfBirth: { type: String, match: DATE_REGEX, required: true },
+    email: { type: String, match: EMAIL_REGEX, required: true, unique: true },
+    password: { type: String, minlength: 6, required: true },
+    avatarURL: { type: String, require: true },
+    token: { type: String, default: '' },
   },
   { versionKey: false, timestamps: true }
 );
@@ -73,11 +52,7 @@ const signinSchema = Joi.object({
   }),
 });
 
-// group all Joi schemas
-const schemas = {
-  signupSchema,
-  signinSchema,
-};
+const schemas = { signupSchema, signinSchema };
 
 // create model for user
 const User = model('user', userSchema);
