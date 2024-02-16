@@ -2,7 +2,7 @@ const { Drink } = require('../../models/drink');
 
 const getFavoriteDrinks = async (req, res) => {
   const { favorites } = req.query;
-  const filter = { owner: req.user._id };
+  const filter = { favorites: {_id: req.user._id} };
 
   if (favorites !== undefined) {
     filter.favorites = favorites.toLowerCase() === 'true';
