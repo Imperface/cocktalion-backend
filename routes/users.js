@@ -24,4 +24,6 @@ router.post(
   controller.signin
 );
 
+router.post('/signout', jsonParser, authenticate, controller.signout);
+
 module.exports = router;

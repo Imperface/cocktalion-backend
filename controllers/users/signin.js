@@ -18,7 +18,7 @@ const signin = async (req, res) => {
     throw HttpError(401, 'Email or password is wrong');
   } else {
     const payload = {
-      id: user._id,
+      _id: user._id,
     };
 
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '24h' });
