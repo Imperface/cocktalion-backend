@@ -14,8 +14,9 @@ const authenticate = async (req, res, next) => {
   const [bearer, token] = authorization.split(' ');
 
   // send error if bearer !== 'Bearer'
-  if (bearer !== 'Bearer') {
+  if (bearer !== 'Bearer' || !token) {
     next(HttpError(401, 'Not authorized'));
+    return;
   }
 
   try {
@@ -30,6 +31,7 @@ const authenticate = async (req, res, next) => {
     // send error if user token not match token from request
     if (user === null || user.token === '' || user.token !== token) {
       next(HttpError(401, 'Not authorized'));
+      return;
     }
 
     // save user data in request
@@ -38,6 +40,7 @@ const authenticate = async (req, res, next) => {
     next();
   } catch (error) {
     next(HttpError(401, 'Not authorized'));
+    return;
   }
 };
 
