@@ -4,6 +4,7 @@ const listCategory = require('./filters/categories');
 const listGlasses = require('./filters/glasses');
 const listIngredients = require('./filters/ingredients');
 const updatedSubscribe = require('./subscribes/subscribe');
+const updateUser = require('./users/updateUser');
 
 const getDrinksPopular = require('./drinks/getDrinksPopular.js');
 const getDrinkById = require('./drinks/getDrinkById.js');
@@ -29,6 +30,8 @@ module.exports = {
   signout: controllerWrapper(signout),
 
   updatedSubscribe: controllerWrapper(updatedSubscribe),
+  updateUser: controllerWrapper(updateUser),
+
   listCategory: controllerWrapper(listCategory),
   listGlasses: controllerWrapper(listGlasses),
   listIngredients: controllerWrapper(listIngredients),

@@ -52,7 +52,28 @@ const signinSchema = Joi.object({
   }),
 });
 
-const schemas = { signupSchema, signinSchema };
+const updateSchema = Joi.object(
+  {
+    name: Joi.string().required(),
+    dateOfBirth: Joi.string().pattern(DATE_REGEX),
+    email: Joi.string().pattern(EMAIL_REGEX).messages({
+      'string.base': `email should be a type of 'string'`,
+      'string.empty': `email cannot be an empty field`,
+      'string.pattern.base': 'wrong email format',
+    }),
+    password: Joi.string().min(6).required().messages({
+      'string.base': `password should be a type of 'string'`,
+      'string.empty': `password cannot be an empty field`,
+    }),
+  }
+  // .or('name', 'email', 'dateOfBirth', 'password')
+  // .required()
+  // .messages({
+  //   'object.missing': 'missing fields',
+  // })
+);
+
+const schemas = { signupSchema, signinSchema, updateSchema };
 
 // create model for user
 const User = model('user', userSchema);
