@@ -65,7 +65,7 @@ const drinkSchema = new Schema(
             type: String,
             required: true,
           },
-          _id: {
+          ingredientId: {
             type: Schema.Types.ObjectId,
             required: true,
             ref: 'ingredient',

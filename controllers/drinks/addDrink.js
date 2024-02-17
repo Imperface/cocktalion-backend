@@ -48,9 +48,7 @@ const drinkAdd = async (req, res, next) => {
     throw HttpError(400, 'Bad request');
   }
 
-  res.status(201).json({
-    addedDrink,
-  });
+  res.status(201).json({ addedDrink });
 };
 
 module.exports = drinkAdd;
