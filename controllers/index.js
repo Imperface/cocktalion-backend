@@ -9,6 +9,7 @@ const getDrinkById = require('./drinks/getDrinkById.js');
 const getDrinksOwner = require('./drinks/getDrinksOwner.js');
 const getCurrent = require('./users/getCurrent');
 const getFavoriteDrinks = require('./drinks/getFavoriteDrinks');
+const getAllDrinks = require('./drinks/getAllDrinks');
 
 const addToFavoritesDrinks = require('./drinks/addToFavoritesDrinks');
 const removeFavoritesDrinks = require('./drinks/removeFavoritesDrinks');
@@ -36,6 +37,7 @@ module.exports = {
   getDrinksOwner: controllerWrapper(getDrinksOwner),
   getDrinksPopular: controllerWrapper(getDrinksPopular),
   addToFavoritesDrinks: controllerWrapper(addToFavoritesDrinks),
+  getAllDrinks: controllerWrapper(getAllDrinks),
 
   removeFavoritesDrinks: controllerWrapper(removeFavoritesDrinks),
   addDrink: controllerWrapper(addDrink),

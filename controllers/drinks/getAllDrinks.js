@@ -1,6 +1,5 @@
-import { Drink } from '../../models/drink';
+const { Drink } = require('../../models/drink');
 
-const successStatus = 200;
 const defaultDocNumber = 3;
 
 const getAllDrinks = async (req, res) => {
@@ -13,10 +12,11 @@ const getAllDrinks = async (req, res) => {
   const result = await Drink.aggregate([
     { $sort: { category: 1 } },
     { $group: { _id: '$category', recipes: { $push: '$$ROOT' } } },
-    { $project: { recipes: { $slice: ['$recipes', docNumber] } } },
+    { $project: { drinks: { $slice: ['$recipes', docNumber] } } },
+    { $limit: 4 },
   ]);
 
-  res.status(successStatus).json(result);
+  res.status(200).json(result);
 };
 
-export default getAllDrinks;
+module.exports = getAllDrinks;
