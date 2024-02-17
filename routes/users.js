@@ -34,4 +34,12 @@ router.post(
 
 router.post('/signout', jsonParser, authenticate, Ctrl.signout);
 
+router.patch(
+  '/update',
+  authenticate,
+  validateBody(schemas.updateSchema),
+  upload.single('avatarURL'),
+  Ctrl.updateUser
+);
+
 module.exports = router;
