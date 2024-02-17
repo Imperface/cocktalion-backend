@@ -2,6 +2,7 @@ const { controllerWrapper } = require('../decorators');
 
 const listCategory = require('./filters/categories');
 const listGlasses = require('./filters/glasses');
+const listIngredients = require('./filters/ingredients');
 const updatedSubscribe = require('./subscribes/subscribe');
 
 const getDrinksPopular = require('./drinks/getDrinksPopular.js');
@@ -28,6 +29,7 @@ module.exports = {
   updatedSubscribe: controllerWrapper(updatedSubscribe),
   listCategory: controllerWrapper(listCategory),
   listGlasses: controllerWrapper(listGlasses),
+  listIngredients: controllerWrapper(listIngredients),
   getDrinkById: controllerWrapper(getDrinkById),
   getCurrent: controllerWrapper(getCurrent),
 
