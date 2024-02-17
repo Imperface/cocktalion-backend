@@ -33,6 +33,7 @@ router.delete(
 router.get('/own', authenticate, Ctrl.getDrinksOwner);
 router.get('/popular', authenticate, Ctrl.getDrinksPopular);
 
+router.get('/main-page', Ctrl.getAllDrinks);
 router.get('/:id', authenticate, isValidId, Ctrl.getDrinkById);
 
 router.get('/search', authenticate, Ctrl.getDrinksSearch);
