@@ -20,6 +20,7 @@ const signout = require('./users/signout');
 
 const addDrink = require('./drinks/addDrink');
 const removeOwnerDrinksById = require('./drinks/removeOwnerDrinksById');
+const getDrinksSearch = require('./drinks/getDrinksSearch');
 
 module.exports = {
   signup: controllerWrapper(signup),
@@ -42,4 +43,5 @@ module.exports = {
   removeFavoritesDrinks: controllerWrapper(removeFavoritesDrinks),
   addDrink: controllerWrapper(addDrink),
   removeOwnerDrinksById: controllerWrapper(removeOwnerDrinksById),
+  getDrinksSearch: controllerWrapper(getDrinksSearch),
 };

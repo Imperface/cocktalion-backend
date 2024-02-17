@@ -35,6 +35,8 @@ router.get('/popular', authenticate, Ctrl.getDrinksPopular);
 
 router.get('/:id', authenticate, isValidId, Ctrl.getDrinkById);
 
+router.get('/search', authenticate, Ctrl.getDrinksSearch);
+
 router.post(
   '/own/add',
   authenticate,
