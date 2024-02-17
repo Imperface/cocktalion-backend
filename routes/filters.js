@@ -11,6 +11,6 @@ router.get('/categories', authenticate, Ctrl.listCategory);
 
 router.get('/glasses', authenticate, Ctrl.listGlasses);
 
-// router.get('/ingredients', authenticate);
+router.get('/ingredients', authenticate, Ctrl.listIngredients);
 
 module.exports = router;
