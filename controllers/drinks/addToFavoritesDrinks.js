@@ -6,7 +6,7 @@ const addToFavoritesDrinks = async (req, res) => {
   const { _id } = req.body;
 
   // get id from user
-  const { _id: userId } = req.user;
+  const { _id: userId, email } = req.user;
 
   // looking for drink in db
   const drink = await Drink.findOne({ _id });
@@ -32,7 +32,7 @@ const addToFavoritesDrinks = async (req, res) => {
   // push userId to favorites array
   const addToFavorite = await Drink.findByIdAndUpdate(
     _id,
-    { $push: { favorites: { _id: userId } } },
+    { $push: { favorites: { _id: userId, email } } },
     { new: true }
   );
 

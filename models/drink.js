@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
-const { DRINKS_CATEGORY, GLASSES } = require('../constants');
+const { DRINKS_CATEGORY, GLASSES, EMAIL_REGEX } = require('../constants');
 
 // mongoose schema
 const drinkSchema = new Schema(
@@ -89,6 +89,11 @@ const drinkSchema = new Schema(
             type: Schema.Types.ObjectId,
             required: true,
             ref: 'user',
+          },
+          email: {
+            type: String,
+            match: EMAIL_REGEX,
+            required: true,
           },
         },
       ],

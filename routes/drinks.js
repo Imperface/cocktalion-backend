@@ -23,7 +23,12 @@ router.post(
   validateBody(schemas.drinkAddFavoriteSchema),
   Ctrl.addToFavoritesDrinks
 );
-router.delete('/:drinkId', authenticate, isValidId, Ctrl.removeFavoritesDrinks);
+router.delete(
+  '/favorite/remove/:id',
+  authenticate,
+  isValidId,
+  Ctrl.removeFavoritesDrinks
+);
 
 router.get('/own', authenticate, Ctrl.getDrinksOwner);
 router.get('/popular', authenticate, Ctrl.getDrinksPopular);
