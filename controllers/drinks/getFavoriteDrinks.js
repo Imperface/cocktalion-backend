@@ -1,15 +1,13 @@
 const { Drink } = require('../../models/drink');
 
 const getFavoriteDrinks = async (req, res) => {
-  const { favorites } = req.query;
-  const filter = { favorites: {_id: req.user._id} };
+  // get params from user
+  const { _id, email } = req.user;
 
-  if (favorites !== undefined) {
-    filter.favorites = favorites.toLowerCase() === 'true';
-  }
+  // looking for a drink that has _id and email in favorites
+  const drinks = await Drink.find({ favorites: { _id, email } });
 
-  const result = await Drink.find(filter, '-createdAt -updatedAt').populate('favorites');
-  res.json(result);
+  res.status(200).json({ drinks });
 };
 
 module.exports = getFavoriteDrinks;
