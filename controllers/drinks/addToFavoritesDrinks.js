@@ -2,19 +2,43 @@ const { Drink } = require('../../models/drink');
 const { HttpError } = require('../../helpers');
 
 const addToFavoritesDrinks = async (req, res) => {
-  const { drinkId } = req.body; 
+  // get params from body
+  const { _id } = req.body;
 
-    const drink = await Drink.findOne({ _id: drinkId }); 
+  // get id from user
+  const { _id: userId } = req.user;
 
-    if (!drink) {
-      throw HttpError(404, 'Not found'); 
-    }
+  // looking for drink in db
+  const drink = await Drink.findOne({ _id });
 
-    drink.favorites.push(req.user._id);
+  // throw error if drink not found
+  if (!drink) {
+    throw HttpError(404, 'Not found');
+  }
 
-    await drink.save();
+  // get drink favorites
+  const { favorites } = drink;
 
-    res.status(200).json({ message: 'Drink added to favorites', drink: drink });
+  // find userId in favorites
+  const checkDuplicate = favorites.find(
+    item => String(item._id) === String(userId)
+  );
+
+  // throw error if userId found
+  if (checkDuplicate !== undefined) {
+    throw HttpError(409, 'The drink has already been added to favorites');
+  }
+
+  // push userId to favorites array
+  const addToFavorite = await Drink.findByIdAndUpdate(
+    _id,
+    { $push: { favorites: { _id: userId } } },
+    { new: true }
+  );
+
+  res
+    .status(200)
+    .json({ message: 'Drink added to favorites', drink: addToFavorite });
 };
 
 module.exports = addToFavoritesDrinks;

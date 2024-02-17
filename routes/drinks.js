@@ -17,10 +17,10 @@ const jsonParser = express.json();
 const { schemas } = require('../models/drink');
 router.get('/', authenticate, jsonParser, Ctrl.getFavoriteDrinks);
 router.post(
-  '/',
+  '/favorite/add',
   authenticate,
-  validateBody(schemas.drinksAddSchema),
   jsonParser,
+  validateBody(schemas.drinkAddFavoriteSchema),
   Ctrl.addToFavoritesDrinks
 );
 router.delete('/:drinkId', authenticate, isValidId, Ctrl.removeFavoritesDrinks);
