@@ -12,7 +12,7 @@ const drinkAdd = async (req, res, next) => {
     alcoholic,
     glass,
     instructions,
-    drinkThumb,
+    drinkThumb = 'example http',
     shortDescription,
     ingredients,
   } = req.body;
@@ -24,8 +24,11 @@ const drinkAdd = async (req, res, next) => {
   const checkIsUserAdult = isAdult(user.dateOfBirth);
 
   // set non alcoholic if user age < 18
-  if (checkIsUserAdult === false) {
-    alcoholic = 'Non alcoholic';
+  if (checkIsUserAdult === false && alcoholic === 'Alcoholic') {
+    throw HttpError(
+      403,
+      'Forbidden: underage users cannot create alcoholic drinks'
+    );
   }
 
   // create newDrink

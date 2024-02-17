@@ -24,7 +24,9 @@ const getDrinksSearch = async (req, res) => {
 
   const resultCount = await Drink.countDocuments(paramSearch);
 
-  const drinks = await Drink.find(paramSearch, {}, { skip, limit });
+  const drinks = await Drink.find(paramSearch, {}, { skip, limit }).sort({
+    createdAt: -1,
+  });
 
   res.status(200).json({
     message: 'Success operation',

@@ -137,10 +137,6 @@ const drinksAddSchema = Joi.object({
     'string.base': `instructions should be a type of 'string'`,
     'any.required': `missing required instructions field`,
   }),
-  drinkThumb: Joi.string().required().messages({
-    'string.base': `drinkThumb should be a type of 'string'`,
-    'any.required': `missing required drinkThumb field`,
-  }),
   ingredients: Joi.string().required().messages({
     'string.base': `ingredients should be a type of 'string'`,
     'any.required': `missing required ingredients field`,
