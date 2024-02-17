@@ -26,7 +26,7 @@ router.post(
 router.delete('/:drinkId', authenticate, isValidId, Ctrl.removeFavoritesDrinks);
 
 router.get('/own', authenticate, Ctrl.getDrinksOwner);
-router.get('/popular', Ctrl.getDrinksPopular);
+router.get('/popular', authenticate, Ctrl.getDrinksPopular);
 
 router.get('/main-page', Ctrl.getAllDrinks);
 router.get('/:id', authenticate, isValidId, Ctrl.getDrinkById);
