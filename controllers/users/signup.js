@@ -1,10 +1,8 @@
 const { User } = require('../../models/user');
 const { HttpError } = require('../../helpers');
+const { DEFAULT_USER_AVATAR } = require('../../constants');
 
 const bcrypt = require('bcrypt');
-const gravatar = require('gravatar');
-
-const { SECRET_KEY } = process.env;
 
 const signup = async (req, res, next) => {
   const { email, password } = req.body;
@@ -17,7 +15,7 @@ const signup = async (req, res, next) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
 
-  const avatarURL = gravatar.url(email);
+  const avatarURL = DEFAULT_USER_AVATAR;
 
   const newUser = await User.create({
     ...req.body,
