@@ -1,46 +1,49 @@
 const fs = require('fs/promises');
+const path = require('node:path');
 
-const User = require('../../models/user.js');
+const { User } = require('../../models/user.js');
+
 const { HttpError, cloudinary } = require('../../helpers/index.js');
 
 const updateUser = async (req, res) => {
-  let user = null;
-  const { _id, name: userName } = req.user;
-  const { name } = req.body;
-  if (!req.file) {
-    user = await User.findByIdAndUpdate(_id, { name }, { new: true });
-    if (!user) {
-      throw HttpError(404);
-    }
-    return res.json({ name, avatarURL: user.avatarURL });
-  }
-  const { path: tempUpload, originalname } = req.file;
+  const { file } = req;
+  let { _id, name: userName } = req.user;
+  const name = req.body.name;
 
-  const fileName = `${_id}_${originalname}`;
-  const { url: avatarURL } = await cloudinary.uploader.upload(tempUpload, {
-    folder: 'avatars',
-    public_id: fileName,
-    aspect_ratio: '1.0',
-    gravity: 'face',
-    height: 200,
-    zoom: '0.75',
-    crop: 'thumb',
-    radius: 'max',
-  });
-  await fs.unlink(tempUpload);
-  if (name !== userName) {
-    user = await User.findByIdAndUpdate(
-      _id,
-      { avatarURL, name },
-      { new: true }
+  const updateObj = {};
+  if (name !== undefined) {
+    updateObj.name = name;
+  }
+
+  if (file) {
+    const { path: tempUpload, originalname } = req.file;
+
+    const avatar = await cloudinary.uploader.upload(
+      tempUpload,
+      {
+        folder: 'usersAvatars',
+
+        allowed_formats: ['png', 'jpg', 'jpeg'],
+        aspect_ratio: '1.0',
+        gravity: 'face',
+        height: 200,
+        zoom: '0.75',
+        crop: 'thumb',
+        radius: 'max',
+      },
+      function (error, result) {
+        if (error) {
+          throw HttpError(500, 'Server error');
+        }
+      }
     );
-  } else {
-    user = await User.findByIdAndUpdate(_id, { avatarURL }, { new: true });
+    updateObj.avatarURL = avatar.url;
   }
-  if (!user) {
-    throw HttpError(404);
-  }
-  res.json({ avatarURL: user.avatarURL, name: user.name });
+
+  const user = await User.findByIdAndUpdate(_id, updateObj, { new: true });
+  const { _id: userId, name: updatedUsername, email, avatarURL } = user;
+
+  res.json({ _id: userId, name: updatedUsername, email, avatarURL });
 };
 
 module.exports = updateUser;
