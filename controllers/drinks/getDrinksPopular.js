@@ -1,10 +1,10 @@
 const {Drink} = require ('../../models/drink');
+const {isAdult} = require('../../helpers')
 
 const getDrinksPopular = async(req, res) => {
-    
-    const drinksAll = await Drink.find();
-    
-    const drinksFavorite = drinksAll.filter(drink => {
+
+const findPopularDrinks = (arr) => {
+    const drinksFavorite = arr.filter(drink => {
         if (drink.favorites.length !== 0) {
             return true
         }
@@ -21,6 +21,18 @@ const getDrinksPopular = async(req, res) => {
     .slice(0, 4);
        
 res.send(drinksFavorite);
+}
+    
+    const chekAdult = isAdult(req.user.dateOfBirth);
+    
+    if (chekAdult === false){
+        const drinksAll = await Drink.find({alcoholic: "Non alcoholic"});
+
+   findPopularDrinks(drinksAll);
+} 
+const drinksAll = await Drink.find();  
+findPopularDrinks(drinksAll);
+  
 }
 
 module.exports = getDrinksPopular;
