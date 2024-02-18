@@ -13,7 +13,6 @@ const multerConfig = multer.diskStorage({
 const upload = multer({
   storage: multerConfig,
   onError: (error, next) => {
-    console.log(error);
     next(error);
   },
   fileFilter: (req, file, cb) => {

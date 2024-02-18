@@ -1,9 +1,17 @@
 const { Drink } = require('../../models/drink');
-const { isAdult, HttpError } = require('../../helpers');
+const { isAdult, HttpError, cloudinary } = require('../../helpers');
 
 const drinkAdd = async (req, res, next) => {
   // get user from req
   const { user } = req;
+
+  // get file
+  const { file } = req;
+
+  // throw error if file === undefined
+  if (file === undefined) {
+    throw HttpError(400, 'Bad request');
+  }
 
   // get data from body
   let {
@@ -12,7 +20,6 @@ const drinkAdd = async (req, res, next) => {
     alcoholic,
     glass,
     instructions,
-    drinkThumb = 'example http',
     shortDescription,
     ingredients,
   } = req.body;
@@ -23,13 +30,31 @@ const drinkAdd = async (req, res, next) => {
   // check is user adult
   const checkIsUserAdult = isAdult(user.dateOfBirth);
 
-  // set non alcoholic if user age < 18
+  // throw error if user try add Alcoholic drink with user age < 18
   if (checkIsUserAdult === false && alcoholic === 'Alcoholic') {
     throw HttpError(
       403,
       'Forbidden: underage users cannot create alcoholic drinks'
     );
   }
+  // get file path
+  const { path: tempUpload } = req.file;
+
+  // send file to cloudinary
+  const avatar = await cloudinary.uploader.upload(
+    tempUpload,
+    {
+      folder: 'drinksAvatars',
+      allowed_formats: ['png', 'jpg', 'jpeg'],
+    },
+    error => {
+      if (error) {
+        next(HttpError(400, 'Bad request'));
+      }
+    }
+  );
+
+  const drinkThumb = avatar.url;
 
   // create newDrink
   const newDrink = {
