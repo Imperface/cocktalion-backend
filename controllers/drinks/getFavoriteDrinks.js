@@ -5,7 +5,7 @@ const getFavoriteDrinks = async (req, res) => {
   const { _id, email } = req.user;
 
   // looking for a drink that has _id and email in favorites
-  const drinks = await Drink.find({ favorites: { _id, email } });
+  const drinks = await Drink.find({ favorites: { _id } });
 
   res.status(200).json({ drinks });
 };

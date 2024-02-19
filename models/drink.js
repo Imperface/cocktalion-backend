@@ -90,11 +90,6 @@ const drinkSchema = new Schema(
             required: true,
             ref: 'user',
           },
-          email: {
-            type: String,
-            match: EMAIL_REGEX,
-            required: true,
-          },
         },
       ],
       default: [],
