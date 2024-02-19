@@ -12,11 +12,16 @@ const updateUser = async (req, res, next) => {
   // get name from params
   const newUsername = req.body.name;
 
+  // throw error if !file & !newUsername
+  if (!file & !newUsername) {
+    throw HttpError(400, 'Bad request: one of the params require');
+  }
+
   // create object for update
   const updateUserParams = {};
 
-  // add new name to update object if newUsername !== undefined
-  if (newUsername !== undefined) {
+  // add new name to update object if newUsername == true
+  if (newUsername) {
     updateUserParams.name = newUsername;
   }
 

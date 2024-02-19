@@ -144,7 +144,7 @@
       }
     },
     "/api/users/update": {
-      "post": {
+      "patch": {
         "tags": ["Users"],
         "summary": "Update user",
         "security": [{ "Bearer": [] }],
@@ -769,7 +769,8 @@
         "type": "object",
         "properties": {
           "avatarURL": {
-            "type": "binary",
+            "type": "string",
+            "format": "binary",
             "description": "User's avatar"
           },
           "name": {
@@ -829,7 +830,8 @@
         "type": "object",
         "properties": {
           "drinkAvatar": {
-            "type": "binary",
+            "type": "string",
+            "format": "binary",
             "description": "Drink avatar"
           },
           "drink": {
