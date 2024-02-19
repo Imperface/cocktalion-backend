@@ -72,10 +72,6 @@ const drinkAdd = async (req, res, next) => {
   // add new drink
   const addedDrink = await Drink.create(newDrink);
 
-  if (addedDrink === null) {
-    throw HttpError(400, 'Bad request');
-  }
-
   res.status(201).json({ addedDrink });
 };
 
