@@ -2,12 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const path = require('node:path');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 const routes = require('./routes');
 
 const app = express();
 
 // permission cors
 app.use(cors());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // add routes to app
 app.use('/api', routes);

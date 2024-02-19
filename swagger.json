@@ -1,0 +1,1744 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Drinkon",
+    "description": "Showing off swagger-ui-express",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json"],
+  "servers": [
+    { "url": "http://localhost:3000" },
+    { "url": "https://drinkon-backend.onrender.com" }
+  ],
+  "tags": [
+    { "name": "Users", "description": "Users endpoints" },
+    { "name": "Drinks", "description": "Drinks endpoints" },
+    { "name": "Filters", "description": "Filters endpoints" },
+    { "name": "Subscribes", "description": "Subscribes endpoints" }
+  ],
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User signUp",
+        "parameters": [],
+        "requestBody": {
+          "description": "SignUp's object",
+          "required": true,
+
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignUpRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignUpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "409": {
+            "description": "Email in use"
+          }
+        }
+      }
+    },
+    "/api/users/signin": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User signIn",
+        "parameters": [],
+        "requestBody": {
+          "description": "SignIn's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Email or password is wrong"
+          }
+        }
+      }
+    },
+    "/api/users/signout": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User signOut",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignOutResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Current user",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/users/update": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Update user",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "requestBody": {
+          "description": "Update user's object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/drinks/main-page": {
+      "get": {
+        "tags": ["Drinks"],
+        "summary": "Main-page drinks",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "number_of_every",
+            "required": false,
+            "type": "string",
+            "description": "amount of items in one category"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Main-PageDrinksResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/drinks/own/add": {
+      "post": {
+        "tags": ["Drinks"],
+        "summary": "Add drinks",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "requestBody": {
+          "description": "Add drink",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDrinkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddDrinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/api/drinks/own/remove/{id}": {
+      "delete": {
+        "tags": ["Drinks"],
+        "summary": "Remove drink",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "Id drink for delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveDrinkResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "403": {
+            "description": "Forbidden: only the owner of the drink can remove it"
+          },
+          "404": {
+            "description": "Drink Not Found"
+          }
+        }
+      }
+    },
+    "/api/drinks/own": {
+      "get": {
+        "tags": ["Drinks"],
+        "summary": "Own drinks",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OwnDrinksResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/drinks/{id}": {
+      "get": {
+        "tags": ["Drinks"],
+        "summary": "Get drink by id",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "Drink id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DrinkByIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/drinks/search": {
+      "get": {
+        "tags": ["Drinks"],
+        "summary": "Get drink by query params",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "type": "string",
+            "description": "Drink category"
+          },
+          {
+            "in": "query",
+            "name": "ingredientId",
+            "required": false,
+            "type": "string",
+            "description": "Drink ingredientId"
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "type": "string",
+            "description": "Drink query"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "string",
+            "description": "Drink page"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "string",
+            "description": "Drink limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchDrinksResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/drinks/popular": {
+      "get": {
+        "tags": ["Drinks"],
+        "summary": "Get popular drinks",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPopularDrinksResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/drinks/favorite/add": {
+      "post": {
+        "tags": ["Drinks"],
+        "summary": "Add drink to favorite",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "SignIn's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDrinkToFavoriteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddDrinkToFavoriteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Email or password is wrong"
+          },
+          "409": {
+            "description": "The drink has already been added to favorites"
+          }
+        }
+      }
+    },
+    "/api/drinks/favorite/remove/{id}": {
+      "delete": {
+        "tags": ["Drinks"],
+        "summary": "Remove drink from favorite",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "Id drink for remove from favorite"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveDrinkFromFavoriteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Drink is not in the user favorites list"
+          }
+        }
+      }
+    },
+    "/api/drinks/favorite": {
+      "get": {
+        "tags": ["Drinks"],
+        "summary": "Get favorite drinks",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFavoriteDrinksResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/subscribes": {
+      "post": {
+        "tags": ["Subscribes"],
+        "summary": "Add email to subscribes",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "SignIn's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEmailToSubscribesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddEmailToSubscribesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "409": {
+            "description": "Email already subscribed"
+          }
+        }
+      }
+    },
+    "/api/filters/categories": {
+      "get": {
+        "tags": ["Filters"],
+        "summary": "Get categories",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCategories"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/filters/glasses": {
+      "get": {
+        "tags": ["Filters"],
+        "summary": "Get glasses",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGlasses"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/api/filters/ingredients": {
+      "get": {
+        "tags": ["Filters"],
+        "summary": "Get ingredients",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIngredients"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SignUpRequest": {
+        "type": "object",
+        "required": ["name", "email", "password", "dateOfBirth"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John Dou"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "User's date of birth",
+            "example": "12/01/1998"
+          }
+        }
+      },
+      "SignUpResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar URL",
+            "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+          }
+        }
+      },
+      "SignInRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "SignInResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWNmYjZmYTlkZDE3ZjRjNjY2YjNlYzMiLCJpYXQiOjE3MDgyODcyOTgsImV4cCI6MTcwODM3MzY5OH0.7BHu0oJsyqacPoy3LkbWfudNAH6eLvILLlQNujQBLug"
+          },
+          "user": {
+            "type": "object",
+            "description": "User's info",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              }
+            },
+            "example": { "email": "user@example.com" }
+          }
+        }
+      },
+      "SignOutResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "User's sign out",
+            "example": "Logout success"
+          }
+        }
+      },
+      "CurrentResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John Dou"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "User's date of birth",
+            "example": "12/01/1998"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar URL",
+            "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+          }
+        }
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "avatarURL": {
+            "type": "binary",
+            "description": "User's avatar"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "JOHN DOU"
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's name",
+            "example": "65cfb6fa9dd17f4c666b3ec3"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "JOHN DOU"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar URL",
+            "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+          }
+        }
+      },
+      "Main-PageDrinksResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Drinks category",
+              "example": "Cocktail"
+            },
+            "drinks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": "Drinks from category",
+                "example": {}
+              }
+            }
+          }
+        }
+      },
+      "AddDrinkRequest": {
+        "type": "object",
+        "properties": {
+          "drinkAvatar": {
+            "type": "binary",
+            "description": "Drink avatar"
+          },
+          "drink": {
+            "type": "string",
+            "description": "Drink name",
+            "example": "Drink No3"
+          },
+          "category": {
+            "type": "string",
+            "description": "Drink category",
+            "example": "Shot"
+          },
+          "alcoholic": {
+            "type": "string",
+            "description": "Drink alcoholic",
+            "example": "Non alcoholic"
+          },
+          "glass": {
+            "type": "string",
+            "description": "Drink glass",
+            "example": "Jar"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Drink instructions",
+            "example": "instruction1"
+          },
+          "shortDescription": {
+            "type": "string",
+            "description": "Drink short description",
+            "example": "Description1"
+          },
+          "ingredients": {
+            "type": "string",
+            "description": "Drink ingredients",
+            "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+          }
+        }
+      },
+      "AddDrinkResponse": {
+        "type": "object",
+        "properties": {
+          "addedDrink": {
+            "type": "object",
+            "properties": {
+              "drink": {
+                "type": "string",
+                "description": "Drink name",
+                "example": "Drink No3"
+              },
+              "drinkAlternate": {
+                "type": "string",
+                "description": "Drink drinkAlternate",
+                "example": "Sorry, not specified"
+              },
+              "tags": {
+                "type": "string",
+                "description": "Drink tags",
+                "example": "Sorry, not specified"
+              },
+              "video": {
+                "type": "string",
+                "description": "Drink video",
+                "example": "Sorry, not specified"
+              },
+              "category": {
+                "type": "string",
+                "description": "Drink category",
+                "example": "Shot"
+              },
+              "IBA": {
+                "type": "string",
+                "description": "Drink IBA",
+                "example": "Sorry, not specified"
+              },
+              "alcoholic": {
+                "type": "string",
+                "description": "Drink alcoholic",
+                "example": "Non alcoholic"
+              },
+              "glass": {
+                "type": "string",
+                "description": "Drink glass",
+                "example": "Jar"
+              },
+              "description": {
+                "type": "string",
+                "description": "Drink description",
+                "example": "Description1"
+              },
+              "instructions": {
+                "type": "string",
+                "description": "Drink instruction",
+                "example": "Instruction1"
+              },
+              "drinkThumb": {
+                "type": "binary",
+                "description": "Drink thumb",
+                "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+              },
+              "ingredients": {
+                "type": "string",
+                "description": "Drink ingredients",
+                "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+              },
+              "shortDescription": {
+                "type": "string",
+                "description": "Drink short description",
+                "example": "Description1"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "639b6de9ff77d221f190c50f"
+              },
+              "_id": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "64aebb7f82d96cc69e0eb4a7"
+              },
+              "favorites": {
+                "type": "array",
+                "description": "Drinks favorites",
+                "example": []
+              }
+            }
+          }
+        }
+      },
+      "RemoveDrinkResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Delete drink",
+            "example": "Drink deleted"
+          }
+        }
+      },
+      "OwnDrinksResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "drink": {
+              "type": "string",
+              "description": "Drink name",
+              "example": "Drink No3"
+            },
+            "drinkAlternate": {
+              "type": "string",
+              "description": "Drink drinkAlternate",
+              "example": "Sorry, not specified"
+            },
+            "tags": {
+              "type": "string",
+              "description": "Drink tags",
+              "example": "Sorry, not specified"
+            },
+            "video": {
+              "type": "string",
+              "description": "Drink video",
+              "example": "Sorry, not specified"
+            },
+            "category": {
+              "type": "string",
+              "description": "Drink category",
+              "example": "Shot"
+            },
+            "IBA": {
+              "type": "string",
+              "description": "Drink IBA",
+              "example": "Sorry, not specified"
+            },
+            "alcoholic": {
+              "type": "string",
+              "description": "Drink alcoholic",
+              "example": "Non alcoholic"
+            },
+            "glass": {
+              "type": "string",
+              "description": "Drink glass",
+              "example": "Jar"
+            },
+            "description": {
+              "type": "string",
+              "description": "Drink description",
+              "example": "Description1"
+            },
+            "instructions": {
+              "type": "string",
+              "description": "Drink instruction",
+              "example": "Instruction1"
+            },
+            "drinkThumb": {
+              "type": "binary",
+              "description": "Drink thumb",
+              "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+            },
+            "ingredients": {
+              "type": "string",
+              "description": "Drink ingredients",
+              "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+            },
+            "shortDescription": {
+              "type": "string",
+              "description": "Drink short description",
+              "example": "Description1"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Drinks owner",
+              "example": "639b6de9ff77d221f190c50f"
+            },
+            "_id": {
+              "type": "string",
+              "description": "Drinks owner",
+              "example": "64aebb7f82d96cc69e0eb4a7"
+            },
+            "favorites": {
+              "type": "array",
+              "description": "Drinks favorites",
+              "example": []
+            }
+          }
+        }
+      },
+      "DrinkByIdResponse": {
+        "type": "object",
+        "properties": {
+          "drink": {
+            "type": "string",
+            "description": "Drink name",
+            "example": "Drink No3"
+          },
+          "drinkAlternate": {
+            "type": "string",
+            "description": "Drink drinkAlternate",
+            "example": "Sorry, not specified"
+          },
+          "tags": {
+            "type": "string",
+            "description": "Drink tags",
+            "example": "Sorry, not specified"
+          },
+          "video": {
+            "type": "string",
+            "description": "Drink video",
+            "example": "Sorry, not specified"
+          },
+          "category": {
+            "type": "string",
+            "description": "Drink category",
+            "example": "Shot"
+          },
+          "IBA": {
+            "type": "string",
+            "description": "Drink IBA",
+            "example": "Sorry, not specified"
+          },
+          "alcoholic": {
+            "type": "string",
+            "description": "Drink alcoholic",
+            "example": "Non alcoholic"
+          },
+          "glass": {
+            "type": "string",
+            "description": "Drink glass",
+            "example": "Jar"
+          },
+          "description": {
+            "type": "string",
+            "description": "Drink description",
+            "example": "Description1"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Drink instruction",
+            "example": "Instruction1"
+          },
+          "drinkThumb": {
+            "type": "binary",
+            "description": "Drink thumb",
+            "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+          },
+          "ingredients": {
+            "type": "string",
+            "description": "Drink ingredients",
+            "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+          },
+          "shortDescription": {
+            "type": "string",
+            "description": "Drink short description",
+            "example": "Description1"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Drinks owner",
+            "example": "639b6de9ff77d221f190c50f"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Drinks owner",
+            "example": "64aebb7f82d96cc69e0eb4a7"
+          },
+          "favorites": {
+            "type": "array",
+            "description": "Drinks favorites",
+            "example": []
+          }
+        }
+      },
+      "SearchDrinksResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "Success operation"
+          },
+          "quantityTotal": {
+            "type": "integer",
+            "description": "Total drinks",
+            "example": "41"
+          },
+          "drinks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "drink": {
+                  "type": "string",
+                  "description": "Drink name",
+                  "example": "Drink No3"
+                },
+                "drinkAlternate": {
+                  "type": "string",
+                  "description": "Drink drinkAlternate",
+                  "example": "Sorry, not specified"
+                },
+                "tags": {
+                  "type": "string",
+                  "description": "Drink tags",
+                  "example": "Sorry, not specified"
+                },
+                "video": {
+                  "type": "string",
+                  "description": "Drink video",
+                  "example": "Sorry, not specified"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Drink category",
+                  "example": "Shot"
+                },
+                "IBA": {
+                  "type": "string",
+                  "description": "Drink IBA",
+                  "example": "Sorry, not specified"
+                },
+                "alcoholic": {
+                  "type": "string",
+                  "description": "Drink alcoholic",
+                  "example": "Non alcoholic"
+                },
+                "glass": {
+                  "type": "string",
+                  "description": "Drink glass",
+                  "example": "Jar"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Drink description",
+                  "example": "Description1"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "Drink instruction",
+                  "example": "Instruction1"
+                },
+                "drinkThumb": {
+                  "type": "binary",
+                  "description": "Drink thumb",
+                  "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+                },
+                "ingredients": {
+                  "type": "string",
+                  "description": "Drink ingredients",
+                  "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "description": "Drink short description",
+                  "example": "Description1"
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "Drinks owner",
+                  "example": "639b6de9ff77d221f190c50f"
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Drinks owner",
+                  "example": "64aebb7f82d96cc69e0eb4a7"
+                },
+                "favorites": {
+                  "type": "array",
+                  "description": "Drinks favorites",
+                  "example": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetPopularDrinksResponse": {
+        "type": "object",
+        "properties": {
+          "drinks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "drink": {
+                  "type": "string",
+                  "description": "Drink name",
+                  "example": "Drink No3"
+                },
+                "drinkAlternate": {
+                  "type": "string",
+                  "description": "Drink drinkAlternate",
+                  "example": "Sorry, not specified"
+                },
+                "tags": {
+                  "type": "string",
+                  "description": "Drink tags",
+                  "example": "Sorry, not specified"
+                },
+                "video": {
+                  "type": "string",
+                  "description": "Drink video",
+                  "example": "Sorry, not specified"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Drink category",
+                  "example": "Shot"
+                },
+                "IBA": {
+                  "type": "string",
+                  "description": "Drink IBA",
+                  "example": "Sorry, not specified"
+                },
+                "alcoholic": {
+                  "type": "string",
+                  "description": "Drink alcoholic",
+                  "example": "Non alcoholic"
+                },
+                "glass": {
+                  "type": "string",
+                  "description": "Drink glass",
+                  "example": "Jar"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Drink description",
+                  "example": "Description1"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "Drink instruction",
+                  "example": "Instruction1"
+                },
+                "drinkThumb": {
+                  "type": "binary",
+                  "description": "Drink thumb",
+                  "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+                },
+                "ingredients": {
+                  "type": "string",
+                  "description": "Drink ingredients",
+                  "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "description": "Drink short description",
+                  "example": "Description1"
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "Drinks owner",
+                  "example": "639b6de9ff77d221f190c50f"
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Drinks owner",
+                  "example": "64aebb7f82d96cc69e0eb4a7"
+                },
+                "favorites": {
+                  "type": "array",
+                  "description": "Drinks favorites",
+                  "example": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "AddDrinkToFavoriteRequest": {
+        "type": "object",
+        "required": ["_id"],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Drink _id",
+            "example": "639b6de9ff77d221f190c50f"
+          }
+        }
+      },
+      "AddDrinkToFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "Drink added to favorites"
+          },
+          "drink": {
+            "type": "object",
+            "properties": {
+              "drink": {
+                "type": "string",
+                "description": "Drink name",
+                "example": "Drink No3"
+              },
+              "drinkAlternate": {
+                "type": "string",
+                "description": "Drink drinkAlternate",
+                "example": "Sorry, not specified"
+              },
+              "tags": {
+                "type": "string",
+                "description": "Drink tags",
+                "example": "Sorry, not specified"
+              },
+              "video": {
+                "type": "string",
+                "description": "Drink video",
+                "example": "Sorry, not specified"
+              },
+              "category": {
+                "type": "string",
+                "description": "Drink category",
+                "example": "Shot"
+              },
+              "IBA": {
+                "type": "string",
+                "description": "Drink IBA",
+                "example": "Sorry, not specified"
+              },
+              "alcoholic": {
+                "type": "string",
+                "description": "Drink alcoholic",
+                "example": "Non alcoholic"
+              },
+              "glass": {
+                "type": "string",
+                "description": "Drink glass",
+                "example": "Jar"
+              },
+              "description": {
+                "type": "string",
+                "description": "Drink description",
+                "example": "Description1"
+              },
+              "instructions": {
+                "type": "string",
+                "description": "Drink instruction",
+                "example": "Instruction1"
+              },
+              "drinkThumb": {
+                "type": "binary",
+                "description": "Drink thumb",
+                "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+              },
+              "ingredients": {
+                "type": "string",
+                "description": "Drink ingredients",
+                "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+              },
+              "shortDescription": {
+                "type": "string",
+                "description": "Drink short description",
+                "example": "Description1"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "639b6de9ff77d221f190c50f"
+              },
+              "_id": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "64aebb7f82d96cc69e0eb4a7"
+              },
+              "favorites": {
+                "type": "array",
+                "description": "Drinks favorites",
+                "example": []
+              }
+            }
+          }
+        }
+      },
+      "RemoveDrinkFromFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "Favorites deleted"
+          },
+          "drink": {
+            "type": "object",
+            "properties": {
+              "drink": {
+                "type": "string",
+                "description": "Drink name",
+                "example": "Drink No3"
+              },
+              "drinkAlternate": {
+                "type": "string",
+                "description": "Drink drinkAlternate",
+                "example": "Sorry, not specified"
+              },
+              "tags": {
+                "type": "string",
+                "description": "Drink tags",
+                "example": "Sorry, not specified"
+              },
+              "video": {
+                "type": "string",
+                "description": "Drink video",
+                "example": "Sorry, not specified"
+              },
+              "category": {
+                "type": "string",
+                "description": "Drink category",
+                "example": "Shot"
+              },
+              "IBA": {
+                "type": "string",
+                "description": "Drink IBA",
+                "example": "Sorry, not specified"
+              },
+              "alcoholic": {
+                "type": "string",
+                "description": "Drink alcoholic",
+                "example": "Non alcoholic"
+              },
+              "glass": {
+                "type": "string",
+                "description": "Drink glass",
+                "example": "Jar"
+              },
+              "description": {
+                "type": "string",
+                "description": "Drink description",
+                "example": "Description1"
+              },
+              "instructions": {
+                "type": "string",
+                "description": "Drink instruction",
+                "example": "Instruction1"
+              },
+              "drinkThumb": {
+                "type": "binary",
+                "description": "Drink thumb",
+                "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+              },
+              "ingredients": {
+                "type": "string",
+                "description": "Drink ingredients",
+                "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+              },
+              "shortDescription": {
+                "type": "string",
+                "description": "Drink short description",
+                "example": "Description1"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "639b6de9ff77d221f190c50f"
+              },
+              "_id": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "64aebb7f82d96cc69e0eb4a7"
+              },
+              "favorites": {
+                "type": "array",
+                "description": "Drinks favorites",
+                "example": []
+              }
+            }
+          }
+        }
+      },
+      "GetFavoriteDrinksResponse": {
+        "type": "object",
+        "properties": {
+          "drinks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "drink": {
+                  "type": "string",
+                  "description": "Drink name",
+                  "example": "Drink No3"
+                },
+                "drinkAlternate": {
+                  "type": "string",
+                  "description": "Drink drinkAlternate",
+                  "example": "Sorry, not specified"
+                },
+                "tags": {
+                  "type": "string",
+                  "description": "Drink tags",
+                  "example": "Sorry, not specified"
+                },
+                "video": {
+                  "type": "string",
+                  "description": "Drink video",
+                  "example": "Sorry, not specified"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Drink category",
+                  "example": "Shot"
+                },
+                "IBA": {
+                  "type": "string",
+                  "description": "Drink IBA",
+                  "example": "Sorry, not specified"
+                },
+                "alcoholic": {
+                  "type": "string",
+                  "description": "Drink alcoholic",
+                  "example": "Non alcoholic"
+                },
+                "glass": {
+                  "type": "string",
+                  "description": "Drink glass",
+                  "example": "Jar"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Drink description",
+                  "example": "Description1"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "Drink instruction",
+                  "example": "Instruction1"
+                },
+                "drinkThumb": {
+                  "type": "binary",
+                  "description": "Drink thumb",
+                  "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+                },
+                "ingredients": {
+                  "type": "string",
+                  "description": "Drink ingredients",
+                  "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "description": "Drink short description",
+                  "example": "Description1"
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "Drinks owner",
+                  "example": "639b6de9ff77d221f190c50f"
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Drinks owner",
+                  "example": "64aebb7f82d96cc69e0eb4a7"
+                },
+                "favorites": {
+                  "type": "array",
+                  "description": "Drinks favorites",
+                  "example": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "AddEmailToSubscribesRequest": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          }
+        }
+      },
+      "AddEmailToSubscribesResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "subscribe": {
+                "type": "boolean",
+                "description": "Subscribe",
+                "example": true
+              },
+              "addedBy": {
+                "type": "string",
+                "description": "user id who added",
+                "example": "65cfb53233f30378574fb6f0"
+              }
+            }
+          }
+        }
+      },
+      "GetCategories": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Category",
+              "example": "Cocoa"
+            }
+          }
+        }
+      },
+      "GetGlasses": {
+        "type": "object",
+        "properties": {
+          "glasses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "glasses",
+              "example": "Cocktail glass"
+            }
+          }
+        }
+      },
+      "GetIngredients": {
+        "type": "object",
+        "properties": {
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Ingredient id",
+                  "example": "64aebb7f82d96cc69e0eb4a7"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Ingredient title",
+                  "example": "Dark rum"
+                },
+                "ingredientThumb": {
+                  "type": "string",
+                  "description": "Ingredient thumb",
+                  "example": "https://ftp.goit.study/img/drinkify/ingredients/Dark_rum.png"
+                },
+                "thumb-medium": {
+                  "type": "string",
+                  "description": "Ingredient thumb-medium",
+                  "example": "https://ftp.goit.study/img/drinkify/ingredients/Dark_rum-Medium.png"
+                },
+                "thumb-small": {
+                  "type": "string",
+                  "description": "Ingredient thumb-small",
+                  "example": "https://ftp.goit.study/img/drinkify/ingredients/Dark_rum-Small.png"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
