@@ -29,7 +29,7 @@ const signupSchema = Joi.object({
     'string.base': `email should be a type of 'string'`,
     'string.empty': `email cannot be an empty field`,
     'any.required': `missing required email field`,
-    'string.pattern.base': 'wrong email format',
+    'string.pattern.base': 'the email must be in format test@gmail.com',
   }),
   password: Joi.string().min(6).required().messages({
     'string.base': `password should be a type of 'string'`,
@@ -43,7 +43,7 @@ const signinSchema = Joi.object({
     'string.base': `email should be a type of 'string'`,
     'string.empty': `email cannot be an empty field`,
     'any.required': `missing required email field`,
-    'string.pattern.base': 'wrong email format',
+    'string.pattern.base': 'the email must be in format test@gmail.com',
   }),
   password: Joi.string().min(6).required().messages({
     'string.base': `password should be a type of 'string'`,
