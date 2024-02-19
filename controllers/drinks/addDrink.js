@@ -10,7 +10,7 @@ const drinkAdd = async (req, res, next) => {
 
   // throw error if file === undefined
   if (file === undefined) {
-    throw HttpError(400, 'Bad request');
+    throw HttpError(400, 'Bad request: drinkAvatar is required');
   }
 
   // get data from body
