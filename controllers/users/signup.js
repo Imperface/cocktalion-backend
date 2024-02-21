@@ -1,8 +1,10 @@
 const { User } = require('../../models/user');
 const { HttpError } = require('../../helpers');
-const { DEFAULT_USER_AVATAR } = require('../../constants');
-
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
+const { DEFAULT_USER_AVATAR } = require('../../constants');
+const { SECRET_KEY } = process.env;
 
 const signup = async (req, res, next) => {
   const { email, password } = req.body;
@@ -23,7 +25,16 @@ const signup = async (req, res, next) => {
     avatarURL,
   });
 
+  const payload = {
+    _id: newUser._id,
+  };
+
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '24h' });
+
+  await User.findByIdAndUpdate(newUser._id, { token });
+
   res.status(201).json({
+    token,
     user: {
       email,
       avatarURL,

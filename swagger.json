@@ -680,15 +680,26 @@
       "SignUpResponse": {
         "type": "object",
         "properties": {
-          "email": {
+          "token": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWNmYjZmYTlkZDE3ZjRjNjY2YjNlYzMiLCJpYXQiOjE3MDgyODcyOTgsImV4cCI6MTcwODM3MzY5OH0.7BHu0oJsyqacPoy3LkbWfudNAH6eLvILLlQNujQBLug"
           },
-          "avatarURL": {
-            "type": "string",
-            "description": "User's avatar URL",
-            "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+          "user": {
+            "type": "object",
+            "description": "User's info",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar URL",
+                "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+              }
+            }
           }
         }
       },
