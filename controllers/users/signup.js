@@ -7,7 +7,7 @@ const { DEFAULT_USER_AVATAR } = require('../../constants');
 const { SECRET_KEY } = process.env;
 
 const signup = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -38,6 +38,7 @@ const signup = async (req, res, next) => {
     user: {
       email,
       avatarURL,
+      name,
     },
   });
 };

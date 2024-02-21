@@ -698,6 +698,11 @@
                 "type": "string",
                 "description": "User's avatar URL",
                 "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "John Dou"
               }
             }
           }
@@ -735,9 +740,18 @@
                 "type": "string",
                 "description": "User's email",
                 "format": "email"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar URL",
+                "example": "https://res.cloudinary.com/ducypfx9w/image/upload/v1708226709/usersAvatars/mgfnbazb3889nxrklp3v.png"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "John Dou"
               }
-            },
-            "example": { "email": "user@example.com" }
+            }
           }
         }
       },

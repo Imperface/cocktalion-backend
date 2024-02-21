@@ -31,6 +31,8 @@ const signin = async (req, res) => {
     token,
     user: {
       email,
+      name: user.name,
+      avatarUrl: user.avatarURL,
     },
   });
 };
