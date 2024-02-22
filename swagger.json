@@ -993,6 +993,91 @@
             "type": "string",
             "description": "Delete drink",
             "example": "Drink deleted"
+          },
+          "drink": {
+            "type": "object",
+            "properties": {
+              "drink": {
+                "type": "string",
+                "description": "Drink name",
+                "example": "Drink No3"
+              },
+              "drinkAlternate": {
+                "type": "string",
+                "description": "Drink drinkAlternate",
+                "example": "Sorry, not specified"
+              },
+              "tags": {
+                "type": "string",
+                "description": "Drink tags",
+                "example": "Sorry, not specified"
+              },
+              "video": {
+                "type": "string",
+                "description": "Drink video",
+                "example": "Sorry, not specified"
+              },
+              "category": {
+                "type": "string",
+                "description": "Drink category",
+                "example": "Shot"
+              },
+              "IBA": {
+                "type": "string",
+                "description": "Drink IBA",
+                "example": "Sorry, not specified"
+              },
+              "alcoholic": {
+                "type": "string",
+                "description": "Drink alcoholic",
+                "example": "Non alcoholic"
+              },
+              "glass": {
+                "type": "string",
+                "description": "Drink glass",
+                "example": "Jar"
+              },
+              "description": {
+                "type": "string",
+                "description": "Drink description",
+                "example": "Description1"
+              },
+              "instructions": {
+                "type": "string",
+                "description": "Drink instruction",
+                "example": "Instruction1"
+              },
+              "drinkThumb": {
+                "type": "binary",
+                "description": "Drink thumb",
+                "example": "http://res.cloudinary.com/ducypfx9w/image/upload/v1708303185/drinksAvatars/iiyeeaeuckxcp6en26qt.png"
+              },
+              "ingredients": {
+                "type": "string",
+                "description": "Drink ingredients",
+                "example": "[{\"title\":\"Dark rum\",\"measure\": \"1 1/2 oz \", \"ingredientId\": \"64aebb7f82d96cc69e0eb4a7\"}]"
+              },
+              "shortDescription": {
+                "type": "string",
+                "description": "Drink short description",
+                "example": "Description1"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "639b6de9ff77d221f190c50f"
+              },
+              "_id": {
+                "type": "string",
+                "description": "Drinks owner",
+                "example": "64aebb7f82d96cc69e0eb4a7"
+              },
+              "favorites": {
+                "type": "array",
+                "description": "Drinks favorites",
+                "example": []
+              }
+            }
           }
         }
       },
