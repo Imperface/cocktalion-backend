@@ -30,6 +30,7 @@ const signin = async (req, res) => {
   res.json({
     token,
     user: {
+      _id: user._id,
       email,
       name: user.name,
       avatarUrl: user.avatarURL,
