@@ -51,7 +51,7 @@ const updateUser = async (req, res, next) => {
     );
 
     // add new avatarURL to object for update
-    updateUserParams.avatarURL = avatar.url;
+    updateUserParams.avatarURL = avatar.secure_url;
   }
 
   // update user

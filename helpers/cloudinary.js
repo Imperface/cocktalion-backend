@@ -11,6 +11,7 @@ cloudinary.config({
   cloud_name: CLOUDINARY_NAME,
   api_key: CLOUDINARY_APIKEY,
   api_secret: CLOUDINARY_APISECRET,
+  secure: true,
 });
 
 module.exports = cloudinary;

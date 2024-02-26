@@ -41,6 +41,7 @@ const drinkAdd = async (req, res, next) => {
   const { path: tempUpload } = req.file;
 
   // send file to cloudinary
+
   const avatar = await cloudinary.uploader.upload(
     tempUpload,
     {
@@ -54,7 +55,8 @@ const drinkAdd = async (req, res, next) => {
     }
   );
 
-  const drinkThumb = avatar.url;
+  const drinkThumb = avatar.secure_url;
+  console.log(avatar);
 
   // create newDrink
   const newDrink = {
